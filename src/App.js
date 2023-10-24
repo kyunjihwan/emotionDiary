@@ -40,31 +40,31 @@ export const DiaryDispatchContext = React.createContext();
 
 const dummyData = [
   {
-    id: 1,
+    id: 100,
     emotion: 1,
     content: "오늘의 일기 1번",
     date: 1698111231396,
   },
   {
-    id: 2,
+    id: 101,
     emotion: 2,
     content: "오늘의 일기 2번",
     date: 1698111231397,
   },
   {
-    id: 3,
+    id: 102,
     emotion: 3,
     content: "오늘의 일기 3번",
     date: 1698111231398,
   },
   {
-    id: 4,
+    id: 103,
     emotion: 4,
     content: "오늘의 일기 4번",
     date: 1698111231399,
   },
   {
-    id: 5,
+    id: 104,
     emotion: 5,
     content: "오늘의 일기 5번",
     date: 1698111231400,
@@ -88,7 +88,7 @@ function App() {
         emotion,
       },
     });
-    dataId.current++;
+    dataId.current += 1;
   };
   // REMOVE
   const onRemove = (targetId) => {
