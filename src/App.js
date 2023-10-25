@@ -44,13 +44,15 @@ function App() {
   // localStorage 값 가져오기
   useEffect(() => {
     const localData = localStorage.getItem("diray");
-    const dirayList = JSON.parse(localData).sort(
-      (a, b) => parseInt(b.id) - parseInt(a.id)
-    );
-    if (dirayList.length >= 1) {
-      dataId.current = parseInt(dirayList[0].id) + 1;
+    if (localData) {
+      const dirayList = JSON.parse(localData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+      if (dirayList.length >= 1) {
+        dataId.current = parseInt(dirayList[0].id) + 1;
 
-      dispatch({ type: "INIT", data: dirayList });
+        dispatch({ type: "INIT", data: dirayList });
+      }
     }
   }, []);
 
