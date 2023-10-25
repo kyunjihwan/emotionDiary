@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 import New from "./pages/New";
-import React, { useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -32,51 +32,31 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  // localStorage 값 저장하기
+  localStorage.setItem("diray", JSON.stringify(newState));
   return newState;
 };
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyData = [
-  {
-    id: 1,
-    emotion: 1,
-    content: "오늘의 일기 1번",
-    date: 1698111231396,
-  },
-  {
-    id: 2,
-    emotion: 2,
-    content: "오늘의 일기 2번",
-    date: 1698111231397,
-  },
-  {
-    id: 3,
-    emotion: 3,
-    content: "오늘의 일기 3번",
-    date: 1698111231398,
-  },
-  {
-    id: 4,
-    emotion: 4,
-    content: "오늘의 일기 4번",
-    date: 1698111231399,
-  },
-  {
-    id: 5,
-    emotion: 5,
-    content: "오늘의 일기 5번",
-    date: 1698111231400,
-  },
-];
-
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyData);
+  // localStorage 값 가져오기
+  useEffect(() => {
+    const localData = localStorage.getItem("diray");
+    const dirayList = JSON.parse(localData).sort(
+      (a, b) => parseInt(b.id) - parseInt(a.id)
+    );
+    if (dirayList.length >= 1) {
+      dataId.current = parseInt(dirayList[0].id) + 1;
 
-  console.log(new Date().getTime());
+      dispatch({ type: "INIT", data: dirayList });
+    }
+  }, []);
 
-  const dataId = useRef(6);
+  const [data, dispatch] = useReducer(reducer, []);
+
+  const dataId = useRef(0);
   // CREATE
   const onCreate = (date, content, emotion) => {
     dispatch({

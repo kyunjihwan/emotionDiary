@@ -25,7 +25,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   };
 
   // 작성 완료 버튼
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
   const handleSubmit = () => {
     if (content < 1) {
       contentRef.current.focus();
@@ -45,6 +45,14 @@ const DiaryEditor = ({ isEdit, originData }) => {
     }
     // replace : true로 하면 뒤로가기 버튼을 못함
     navigate("/", { replace: true });
+  };
+
+  // 삭제하기 버튼
+  const handleRemove = () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      onRemove(originData.id);
+      navigate("/", { replace: true });
+    }
   };
 
   useEffect(() => {
@@ -68,6 +76,15 @@ const DiaryEditor = ({ isEdit, originData }) => {
               navigate(-1);
             }}
           />
+        }
+        rightChild={
+          isEdit && (
+            <MyButton
+              text={"삭제하기"}
+              type={"negative"}
+              onClick={handleRemove}
+            />
+          )
         }
       />
       <div>
