@@ -40,31 +40,31 @@ export const DiaryDispatchContext = React.createContext();
 
 const dummyData = [
   {
-    id: 100,
+    id: 1,
     emotion: 1,
     content: "오늘의 일기 1번",
     date: 1698111231396,
   },
   {
-    id: 101,
+    id: 2,
     emotion: 2,
     content: "오늘의 일기 2번",
     date: 1698111231397,
   },
   {
-    id: 102,
+    id: 3,
     emotion: 3,
     content: "오늘의 일기 3번",
     date: 1698111231398,
   },
   {
-    id: 103,
+    id: 4,
     emotion: 4,
     content: "오늘의 일기 4번",
     date: 1698111231399,
   },
   {
-    id: 104,
+    id: 5,
     emotion: 5,
     content: "오늘의 일기 5번",
     date: 1698111231400,
@@ -76,7 +76,7 @@ function App() {
 
   console.log(new Date().getTime());
 
-  const dataId = useRef(1);
+  const dataId = useRef(6);
   // CREATE
   const onCreate = (date, content, emotion) => {
     dispatch({

@@ -33,8 +33,6 @@ const Diary = () => {
       (it) => parseInt(it.emotion_id) === parseInt(data.emotion)
     );
 
-    console.log(curEmotionData);
-
     return (
       <div className="DiaryPage">
         <MyHeader

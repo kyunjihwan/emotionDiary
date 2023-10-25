@@ -5,7 +5,7 @@ import DiaryItem from "./Diaryitem";
 
 // option 태그 리스트
 const sortOptionList = [
-  { value: "lastest", name: "최신순" },
+  { value: "latest", name: "최신순" },
   { value: "oldest", name: "오래된 순" },
 ];
 
@@ -39,7 +39,7 @@ const DiaryList = ({ diaryList }) => {
   // useNavigate
   const navigate = useNavigate();
   // 날짜별로 일기 정렬 State
-  const [sortType, setSortType] = useState("lastest");
+  const [sortType, setSortType] = useState("latest");
   // 감정별로 일기 정렬 State
   const [filter, setFilter] = useState("all");
 
@@ -47,7 +47,7 @@ const DiaryList = ({ diaryList }) => {
   const getProcessedDiaryList = () => {
     // 오름차순, 내림차순 정렬
     const compare = (a, b) => {
-      if (sortType === "lastest") {
+      if (sortType === "latest") {
         return parseInt(b.date) - parseInt(a.date);
       } else {
         return parseInt(a.date) - parseInt(b.date);
