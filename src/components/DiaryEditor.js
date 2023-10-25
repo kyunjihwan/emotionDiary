@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef, useContext, useEffect, useCallback } from "react";
 
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
@@ -20,9 +20,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const contentRef = useRef();
 
   // 감정 상태 저장
-  const handleClickEmote = (emotion) => {
+  const handleClickEmote = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
 
   // 작성 완료 버튼
   const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);

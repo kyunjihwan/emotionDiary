@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import MyButton from "./MyButton";
 import { useNavigate } from "react-router-dom";
 import DiaryItem from "./Diaryitem";
@@ -16,7 +16,10 @@ const filterOptionList = [
 ];
 
 // select문 컴포넌트
-const ControllerMenu = ({ value, onChange, optionList }) => {
+// React.memo에 onChange는 콜백함수에 일관성을 유지시켜줘야한다.
+// onChange가 가지고있는 콜백함수가 재생성 되면 React.memon가 정상적으로 작동하지 않는다.
+// 여기서는 setState를 사용해서 괜찮다.(setState는 동일한 아이디(object의 주소)를 제공해준다.)
+const ControllerMenu = React.memo(({ value, onChange, optionList }) => {
   return (
     <select
       className="ControllerMenu"
@@ -32,7 +35,7 @@ const ControllerMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-};
+});
 
 // DiaryList 컴포넌트
 const DiaryList = ({ diaryList }) => {
